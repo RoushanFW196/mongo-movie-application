@@ -1,0 +1,27 @@
+show dbs
+use movie
+db.createCollection("movieinfo")
+show dbs
+use movie
+// now mockdata are imported from moackroo.com
+// by using mongocompass imported to shell
+db.movieinfo.find().pretty()
+ db.movieinfo.find({"movie_name":{$eq:"The Indian Fighter"}},{"production year":1,"movie_name":1}).pretty()  
+ db.movieinfo.find({"movie_name":{$ne:"The Indian Fighter"}},{"production year":1,"movie_name":1}).pretty()
+   
+ db.movieinfo.find({"budget":{$gte:10000}},{"production year":1,"movie_name":1}).pretty()  
+ db.movieinfo.find({"budget":{$lte:15000}},{"production year":1,"movie_name":1}).pretty()  
+ db.movieinfo.find({$and:[{"production year":{$gt:2000}},{"budget":{$gt:10000}}]},{"production year":1,"movie_name":1}).pretty()  
+ db.movieinfo.find({$or:[{"production year":{$gt:2000}},{"budget":{$gt:10000}}]},{"production year":1,"movie_name":1}).pretty()  
+              
+                
+ db.movieinfo.find({$nor:[{"production year":{$gt:2000}},{"budget":{$gt:10000}}]},{"production year":1,"movie_name":1}).pretty()
+      
+ db.movieinfo.find({$or:[{"production year":{$not:{$eq:2000}}},{"budget":{$not:{$eq:10000}}}]},{"production year":1,"movie_name":1}).pretty() 
+      
+ db.movieinfo.find({$and:[{"production year":{$gte:2000}},{"production year":{$lt:2010}}]},{"production year":1,"movie_name":1}).pretty()   
+    
+> db.movieinfo.find().sort({"production year":-1,"movie_name":-1}).pretty()   
+ db.movieinfo.find().sort({"production year":-1,"movie_name":-1}).skip(10).limit(5).pretty()
+       
+db.movieinfo.find({"production year":{$lt:2020}},{"Genre":0}).sort({"production year":-1,"movie_name":-1}).limit(10).pretty()                                                                                                           
